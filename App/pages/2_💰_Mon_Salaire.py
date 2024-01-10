@@ -17,9 +17,9 @@ primes = [[4, 2], [6, 3], [8, 4], [10, 5], [15, 5.5], [20, 6]]
 # Container pour le renseignement de son grade
 with st.container():
     st.subheader("Je renseigne mon grade")
-    with st.expander("En savoir plus"):
-        st.write("""Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                 ut labore et dolore magna aliqua. Ut enim ad minim veniam ut aliquip ex ea commodo consequat""")
+    with st.expander("Où trouver votre grade"):
+        st.write("""Vous pouvez retrouver votre grade, ou votre qualification, sur le haut de votre fiche de paye.
+        Exemple+""")
     niveau = st.selectbox('Selectionner votre niveau', grades["Niveau"].drop_duplicates().drop_duplicates())
     echelon = st.selectbox('Selectionner votre échelon', grades.loc[grades['Niveau'] == niveau, 'Echelon'].drop_duplicates().drop_duplicates())
 
@@ -54,6 +54,94 @@ with st.container():
         Si vous faites du complément d'heures, ne les comptez pas ici.""")
     heures_travaillees = st.number_input("Entrer le nombre d'heures travaillées ce mois (heures supplémentaires et compléments d'heures compris)", step=1, format="%i")
     est_taux_horaire_B = st.checkbox("J'ai travaillé trois mois en continu et je ne suis pas en remplacement")
+
+st.divider()
+
+# Container pour les informations sur le travail de nuit
+a_travail_de_nuit = st.checkbox("J'ai effectué du travail de nuit")
+with st.expander("Qu'est-ce qu'une heure de nuit ?"):
+    st.write("""Les heures de nuits sont les heures de travail effectuées entre 21h et 5h du
+    matin si vous n'avez pas le statut de travailleur de nuit, et entre 21h et 6h du matin 
+    si vous avez le statut de travailleur de nuit.    
+    Le statut de travailleur de nuit concerne les personnes qui travaillent au moins **2 
+    fois par semaine** plus de **3h** entre 21h et 6h.    
+    De plus, il concerne aussi les personnes ayant effectuées **plus de 270h** de travail
+    de nuit sur les **12 mois précédents**.    
+    Le statut de travailleur de nuit donne droit à des compensations en heures de repos
+    supplémentaires.
+    """)
+
+heures_de_nuit_regulieres = 0
+heures_de_nuit_occasionnelles = 0
+
+if a_travail_de_nuit:
+    with st.container():
+        st.subheader("Je renseigne mes heures de nuit pour des travaux réguliers")
+        with st.expander("Qu'est-ce qu'une heure de nuit pour des travaux réguliers ?"):
+            st.write("""Les travaux réguliers concernent tous les travaux planifiés et
+            potentiellement inscrits dans le contrat de travail. Les heures de travail
+            de nuit exercées dans ce cadre sont bonifiées à hauteur de 20%""")
+        heures_de_nuit_regulieres = st.number_input("Entrer le nombre d'heures faites de nuit pour des travaux réguliers", step=1, format="%i")
+
+    with st.container():
+        st.subheader("Je renseigne mes heures de nuit pour des travaux occasionnels")
+        with st.expander("Qu'est-ce qu'une heure de nuit pour des travaux occasionnels ?"):
+            st.write("""Les travaux occasionnels désignent tous les travaux non planifiés.
+            Les heures de travail de nuit exercées dans ce cadre sont bonifiées à hauteur 
+            de 100%""")
+        heures_de_nuit_occasionnelles = st.number_input("Entrer le nombre d'heures faites de nuit pour des travaux occasionnels", step=1, format="%i")
+
+st.divider()
+
+# Container pour renseigner son nombre d'heures le dimanche
+
+a_travail_le_jour_du_dimanche = st.checkbox("J'ai travaillé le dimanche")
+with st.expander("Qu'elle est la rémunération "):
+    st.write("""Les heures de travail du dimanche sont majorées dans les conditions ci-après :    
+ - heures de travail effectuées normalement le dimanche conformément au planning et/ou contrat de travail du salarié : 20 % ;
+ - heures de travail effectuées exceptionnellement le dimanche non prévues au planning ni au contrat de travail : 100 %.""")
+
+heures_du_dimanche = 0
+
+if a_travail_le_jour_du_dimanche:
+    with st.container():
+        a_contrat_de_travail_jour_du_dimanche = st.checkbox("Il est écrit dans mon contrat de travail que je travaille le dimanche. ")
+        st.subheader("Je renseigne mes heures effectuées le dimanche")
+        heures_du_dimanche = st.number_input("Entrer le nombre d'heures faites le dimanche", step=1, format="%i")
+
+st.divider()
+
+# Container pour renseigner son nombre d'heures les jours fériés
+
+a_travail_le_jour_ferie = st.checkbox("J'ai travaillé des jours fériés")
+with st.expander("Qu'elle est la rémunération pour les jours fériés? "):
+    st.write("""Les heures de travail les jours fériés sont majorées dans les conditions ci-après :
+ – heures de travail effectuées normalement les jours fériés conformément au planning et/ou contrat de travail du salarié : 50 % ;
+ – heures de travail effectuées exceptionnellement les jours fériés non prévues au planning ni au contrat de travail : 100 %.""")
+
+heures_du_ferie = 0
+
+if a_travail_le_jour_ferie:
+    with st.container():
+        a_contrat_de_travail_jour_ferie = st.checkbox("Il est écrit dans mon contrat de travail que je travaille les jours fériés. ")
+        st.subheader("Je renseigne mes heures effectuées les jours fériés ce mois-ci")
+        heures_du_ferie = st.number_input("Entrer le nombre d'heures faites les jours fériés", step=1, format="%i")
+
+st.divider()
+
+# Container pour complement heures
+
+a_complement_heures = st.checkbox("J'ai un ou plusieurs compléments d'heures")
+with st.expander("Qu'est-ce qu'un complément d'heures"):
+    st.write("""Un complément d'heure est un avenant au contrat de travail pouvant 
+    être proposé au travailleur en temps partiel. Il s'agit d'ajouter des heures 
+    (au minimum 1/10 des heures du contrat initial). C'est un ajout **temporaire**
+    bien déterminer entre une date de début et une date de fin. Les heures 
+    travaillées du complément d'heure sont bonifiées à 10%.""")
+
+if a_complement_heures:
+    with st.container():
+        heures_du_complement = st.number_input("Entrer le nombre d'heure du complément pour le mois voulu", step=1, format="%i")
 
 st.divider()
 
