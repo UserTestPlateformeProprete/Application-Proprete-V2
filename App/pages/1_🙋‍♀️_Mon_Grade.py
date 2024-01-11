@@ -8,8 +8,13 @@ st.set_page_config(
 )
 st.title("Déterminer son grade")
 
+# Import des données pre-requises pour les salaires
 niveau_remuneration = pd.read_csv('App/fiche_grades_et_salaires.csv')
 # st.write(grades)
+
+# Import des données pre-requises pour grades
+data_echelons = pd.read_csv('App/fiche_niveau_et_echelon.csv')
+# st.write(data_echelons)
 
 # Conteneur intro explicative
 with st.container(border=True):
@@ -18,10 +23,6 @@ with st.container(border=True):
     with st.expander("Voir les niveaux de rémunération"):
         st.write(niveau_remuneration)
 
-# Import des données de pre-requis pour grades
-data_echelons = pd.read_csv('App/fiche_niveau_et_echelon.csv')
-# st.write(data_echelons)
-
 # Conteneur d'evaluation de son autonomie
 with (st.container()):
     st.subheader("J'évalue mon niveau d'autonomie")
@@ -29,7 +30,6 @@ with (st.container()):
                                 label_visibility="collapsed",
                                 options=data_echelons["Autonomie"].drop_duplicates(),
                                 index=None)
-
     if niveau_autonomie is not None:
         nca = data_echelons.loc[
             data_echelons["Autonomie"] == niveau_autonomie, ["Niveau", "Échelon"]]
@@ -79,10 +79,6 @@ with (st.container()):
     if niveau_responsabilite is not None and niveau_technicite is not None and niveau_autonomie is not None:
         index_grade_pretendu = min(ncr.index.max(), nct.index.max(), nca.index.max())
         grade_pretendu = data_echelons.loc[[index_grade_pretendu], ["Niveau", "Échelon"]]
-
-        # debug
-        st.write("debug : ", pd.concat([nca, ncr, nct]).drop_duplicates())
-
         st.write("La combinaison de mon niveau d'autonomie, de technicité dans mon travail et de responsabilité me "
                  "permet prétendre à la qualification :blue[", grade_pretendu.iloc[0, 0], "], échelon : :blue[",
                  grade_pretendu.iloc[0, 1], "].")
@@ -91,3 +87,6 @@ with (st.container()):
                                              (niveau_remuneration["Echelon"] == grade_pretendu.iloc[0, 1]),
                                              "Taux Horaire B"].iloc[0]),
                  "€/h.")
+    else:
+        st.write("Choississez un niveau pour chacun des trois critères"
+                 " (Autonomie, Responsabilité, Technicité) pour avoir un résultat global")
