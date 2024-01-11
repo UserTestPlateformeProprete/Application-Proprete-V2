@@ -34,7 +34,7 @@ with st.container():
          justifié via un contrat de travail (ou autre justificatif). Une pause ou interruption de plus de 12 mois dans la 
          profession remet le compteur d'expérience à 0.   
          La prime est calculée comme une bonification des heures du contrat à temps partiel selon les niveaux d'expériences
-         suivant :   
+         suivant :      
          - après 4 ans d'expérience professionnelle : 2 % ;   
          - après 6 ans d'expérience professionnelle : 3 % ;   
          - après 8 ans d'expérience professionnelle : 4 % ;   
@@ -48,11 +48,12 @@ st.divider()
 # Container pour renseigner son nombre d'heures
 with st.container():
     st.subheader("Je renseigne mon nombre d'heures travaillées mensuelles")
-    heures_contractuelles = st.number_input("Entrer le nombre d'heures mensuelles du contrat (hors complément d'heures) ", step=1, format="%i")
+    heures_contractuelles = st.number_input("Entrer le nombre d'heures mensuelles "
+                                            "du contrat (hors complément d'heures) ", step=1, format="%i")
     with st.expander("Ou retrouver son nombre d'heures ?"):
-        st.write("""Vous pouvez retrouver ce nombre d'heures sur votre contrat. 
-        Si vous faites du complément d'heures, ne les comptez pas ici.""")
-    heures_travaillees = st.number_input("Entrer le nombre d'heures travaillées ce mois (heures supplémentaires et compléments d'heures compris)", step=1, format="%i")
+        st.write("""Vous pouvez retrouver ce nombre d'heures sur votre contrat.""")
+    heures_travaillees = st.number_input("Entrer le nombre total d'heures travaillées ce mois (heures supplémentaires"
+                                         " et compléments d'heures compris)", step=1, format="%i")
     est_taux_horaire_B = st.checkbox("J'ai travaillé trois mois en continu et je ne suis pas en remplacement")
 
 st.divider()
