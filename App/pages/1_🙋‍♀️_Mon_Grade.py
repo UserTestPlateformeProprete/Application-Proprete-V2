@@ -29,7 +29,8 @@ with (st.container()):
     niveau_autonomie = st.radio("Choississez le niveau d'autonomie qui vous correspond le plus : ",
                                 label_visibility="collapsed",
                                 options=data_echelons["Autonomie"].drop_duplicates(),
-                                index=None)
+                                index=None,
+                                captions=" ")
     if niveau_autonomie is not None:
         nca = data_echelons.loc[
             data_echelons["Autonomie"] == niveau_autonomie, ["Niveau", "Échelon"]]
@@ -45,7 +46,8 @@ with st.container():
     niveau_technicite = st.radio("Choississez le niveau de technicité qui vous correspond le plus : ",
                                  label_visibility="collapsed",
                                  options=data_echelons["Technicité"].drop_duplicates(),
-                                 index=None)
+                                 index=None,
+                                 captions=" ")
     if niveau_technicite is not None:
         nct = data_echelons.loc[
             data_echelons["Technicité"] == niveau_technicite, ["Niveau", "Échelon"]]
@@ -61,7 +63,8 @@ with st.container():
     niveau_responsabilite = st.radio("Choississez le niveau de responsabilité qui vous correspond le plus : ",
                                      label_visibility="collapsed",
                                      options=data_echelons["Responsabilité"].drop_duplicates(),
-                                     index=None)
+                                     index=None,
+                                     captions=" ")
     if niveau_responsabilite is not None:
         ncr = data_echelons.loc[
             data_echelons["Responsabilité"] == niveau_responsabilite, ["Niveau", "Échelon"]]
@@ -82,11 +85,11 @@ with (st.container()):
         st.write("La combinaison de mon niveau d'autonomie, de technicité dans mon travail et de responsabilité me "
                  "permet prétendre à la qualification :blue[", grade_pretendu.iloc[0, 0], "], échelon : :blue[",
                  grade_pretendu.iloc[0, 1], "].")
-        st.write("Cela me permet de prétendre à un salaire de ",
+        st.write("Cela me permet de prétendre à un salaire de :blue[",
                  str(niveau_remuneration.loc[(niveau_remuneration["Niveau"] == grade_pretendu.iloc[0, 0]) &
                                              (niveau_remuneration["Echelon"] == grade_pretendu.iloc[0, 1]),
                                              "Taux Horaire B"].iloc[0]),
-                 "€/h.")
+                 "€/h].")
     else:
         st.write("Choississez un niveau pour chacun des trois critères"
                  " (Autonomie, Responsabilité, Technicité) pour avoir un résultat global")
