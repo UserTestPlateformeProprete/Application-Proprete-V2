@@ -1,1 +1,2 @@
-streamlit run filename.pystreamlit
+streamlit
+pandas
