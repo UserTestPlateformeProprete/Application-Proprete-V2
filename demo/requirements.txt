@@ -1,4 +1,2 @@
 streamlit
-streamlit_option_menu
-streamlit-multipage
-streamlit-extras
+pandas
