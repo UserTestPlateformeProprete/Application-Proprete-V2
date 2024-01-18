@@ -9,11 +9,11 @@ st.set_page_config(
 st.title("Vérifier sa classe")
 
 # Import des données pre-requises pour les salaires
-niveau_remuneration = pd.read_csv('App/fiche_classes_et_salaires.csv')
+niveau_remuneration = pd.read_csv('demo/fiche_classes_et_salaires.csv')
 # st.write(classes)
 
 # Import des données pre-requises pour classes
-data_echelons = pd.read_csv('App/fiche_niveau_et_echelon.csv')
+data_echelons = pd.read_csv('demo/fiche_niveau_et_echelon.csv')
 # st.write(data_echelons)
 
 # Initialisation du résultat dans le session state

@@ -9,7 +9,7 @@ st.set_page_config(
 st.title("Tout savoir sur mon salaire brut")
 
 # Importation de la fiche des salaires
-grades = pd.read_csv('App/fiche_classes_et_salaires.csv')
+grades = pd.read_csv('demo/fiche_classes_et_salaires.csv')
 
 # Inscription en dur des niveaux de prime d'ancienneté
 primes = [[4, 2], [6, 3], [8, 4], [10, 5], [15, 5.5], [20, 6]]
