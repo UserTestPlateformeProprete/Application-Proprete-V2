@@ -201,9 +201,9 @@ with (st.container()):
 
     # Détermination de la base
     if est_taux_horaire_B:
-        base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire B'])
+        base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire B'].iloc[0])
     else:
-        base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire A'])
+        base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire A'].iloc[0])
     st.write("Mon taux horaire brut est de ", base, "€/heure")
 
     # Détermination des heures complémentaires / de la rémunération du complément d'heures
