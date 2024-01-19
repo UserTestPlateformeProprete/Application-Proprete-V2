@@ -63,16 +63,16 @@ with (st.expander(label="Qui sommes nous ?")):
     st.markdown("### Ce site a été développé par :")
     paul, alexandre = st.columns(2, gap="large")
     with paul:
-        st.image(image='App\img\paul.png', caption="Paul Jourdain")
+        st.image(image='App/image/Paul.png', caption="Paul Jourdain")
         st.write("Etudiant en dernière année à l'IMT NE, je m'intéresse à rendre l'informatique plsus durable. J'ai "
                  "rejoint ce projet car je voulais mettre mes compétences au service d'un projet humain.")
-        lin_logo_paul, lin_lien_paul = afg_logo_et_lien('App/img/logo-linkedin-icon-1536.png',
+        lin_logo_paul, lin_lien_paul = afg_logo_et_lien('App/image/logo-linkedin-icon-1536.png',
                                                         "[@jourdain-paul](www.linkedin.com/in/jourdain-paul)")
-        github_logo_paul, github_lien_paul = afg_logo_et_lien('App/img/logo-github.png',
+        github_logo_paul, github_lien_paul = afg_logo_et_lien('App/image/logo-github.png',
                                                               '[Github](https://github.com/ElPaulJ)')
     with alexandre:
-        st.image(image='App/img/Alexandre.png', caption="Alexandre")
+        st.image(image='App/image/Alexandre.png', caption="Alexandre")
         st.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore "
                  "et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.")
-        lin_logo_alex, lin_lien_palex = afg_logo_et_lien('App/img/logo-linkedin-icon-1536.png',
+        lin_logo_alex, lin_lien_palex = afg_logo_et_lien('App/image/logo-linkedin-icon-1536.png',
                                                         "[@alexandre-pontida](www.linkedin.com/in/alexandre-pontida)")
