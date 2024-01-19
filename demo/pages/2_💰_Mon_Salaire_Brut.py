@@ -9,7 +9,7 @@ st.set_page_config(
 st.title("Tout savoir sur mon salaire brut")
 
 # Importation de la fiche des salaires
-grades = pd.read_csv('demo/fiche_classes_et_salaires.csv')
+grades = pd.read_csv('demo/data/fiche_classes_et_salaires.csv')
 
 # Inscription en dur des niveaux de prime d'ancienneté
 primes = [[4, 2], [6, 3], [8, 4], [10, 5], [15, 5.5], [20, 6]]
@@ -156,7 +156,7 @@ st.divider()
 a_travail_le_jour_du_dimanche = st.checkbox("J'ai travaillé le dimanche")
 with st.expander("Qu'elle est la rémunération "):
     st.write("""Les heures de travail du dimanche sont majorées dans les conditions ci-après :    
-    - heures de travail effectuées normalement le dimanche conformément au planning et/ou contrat de travail du salarié
+    - heures de travail effectuées normalement le dimanche conformément au contrat de travail du salarié et/ou planning (sur un document écrit)
      : 20 % ;    
     - heures de travail effectuées exceptionnellement le dimanche non prévues au planning ni au contrat de travail : 
     100 %.""")
@@ -177,7 +177,7 @@ st.divider()
 a_travail_le_jour_ferie = st.checkbox("J'ai travaillé des jours fériés")
 with st.expander("Qu'elle est la rémunération pour les jours fériés? "):
     st.write("""Les heures de travail les jours fériés sont majorées dans les conditions ci-après :    
-    – heures de travail effectuées normalement les jours fériés conformément au planning et/ou contrat de travail 
+    – heures de travail effectuées normalement les jours fériés conformément au contrat de travail et/ou planning (sur un document écrit)
     du salarié : 50%;    
     – heures de travail effectuées exceptionnellement les jours fériés non prévues au planning ni au contrat de 
     travail : 100 %.""")
@@ -201,9 +201,9 @@ with (st.container()):
 
     # Détermination de la base
     if est_taux_horaire_B:
-        base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire B'])
+        base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire B'].iloc[0])
     else:
-        base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire A'])
+        base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire A'].iloc[0])
     st.write("Mon taux horaire brut est de ", base, "€/heure")
 
     # Détermination des heures complémentaires / de la rémunération du complément d'heures
