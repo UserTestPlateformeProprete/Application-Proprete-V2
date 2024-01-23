@@ -8,12 +8,13 @@ st.set_page_config(
 )
 st.title("La déduction forfaitaire spécifique, suis-je gagnant ?")
 
+# Introduction de la page
 with st.container(border=True):
     st.subheader("C'est quoi la déduction forfaitaire spécifique ?")
     st.write("""La déduction forfaitaire spécifique (DFS) ou abattement permet d'augmenter son salaire en diminuant le 
     montant prélevé pour les charges sociales. Mais attention car cela implique donc aussi de diminuer le 
-    montant pris en compte pour la retraite. Ainsi il est important de peser l'importance de cette diminution de 
-    retraite lorsque l'on vous propose d'utiliser la DFS.     
+    montant pris en compte pour le calcul de sa retraite. Ainsi il est important de peser l'importance de cette 
+    diminution de retraite lorsque l'on vous propose d'utiliser la DFS.     
     En 2024 le montant maximal abattu est de 8% est diminue d'1% chaque année. Ainsi, il ne sera plus possible de faire 
     de la déduction forfaitaire spécifique après 2029.    
     Cet outil est là pour aider à visualiser les gains sur son salaire mais aussi les pertes sur sa future retraite.
@@ -46,8 +47,9 @@ with st.container():
     # st.write(salaires)
 
     # Affichage des salaires estimés
-    st.write("En ", int(salaires.iloc[0]["année"]), "le SMIC était de ", int(salaires.iloc[0]["smic"] * nbr_heures_mensuel),
-             "€ donc mon salaire brut mensuel était d'environ ", int(salaires.iloc[0]["salaires"]), "€")
+    st.write("En ", int(salaires.iloc[0]["année"]), "le SMIC était de ",
+             int(salaires.iloc[0]["smic"] * nbr_heures_mensuel),"€ donc mon salaire brut mensuel était d'environ ",
+             int(salaires.iloc[0]["salaires"]), "€")
     if fin - debut > 2:
         st.write("En ", int(salaires.iloc[int(len(salaires) / 2)]["année"]), "le SMIC était de ",
                  int(salaires.iloc[int(len(salaires)/2)]["smic"] * nbr_heures_mensuel),
@@ -55,7 +57,8 @@ with st.container():
                  int(salaires.iloc[int(len(salaires)/2)]["salaires"]), "€")
     if fin - debut > 0:
         st.write("En ", int(salaires.iloc[-1]["année"]), "le SMIC était de ",
-                 int(salaires.iloc[-1]["smic"] * nbr_heures_mensuel), "€ donc mon salaire brut mensuel était d'environ ",
+                 int(salaires.iloc[-1]["smic"] * nbr_heures_mensuel),
+                 "€ donc mon salaire brut mensuel était d'environ ",
                  int(salaires.iloc[-1]["salaires"]), "€")
 
 # Nombre de trimestres effectués
@@ -94,9 +97,10 @@ retraites_annuelles_abattues = 0.5 * salaires["brut annuel corrigé abattu"].mea
 difference_retraite = retraites_annuelles_non_abattues - retraites_annuelles_abattues
 
 # Calcul nombre d'années à la retraite nécessaire pour être gagnant
+# Protection division par 0.
 if difference_retraite == 0:
     annees_de_retraites = 0
-else :
+else:
     annees_de_retraites = gain_abattement_total / difference_retraite
 
 # Affichage du nombre d'années nécessaires

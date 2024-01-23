@@ -20,9 +20,9 @@ if 'qualification' not in st.session_state:
 
 # Conteneur d'intro
 with st.container(border=True):
-    st.write("""Cet outil permet de retrouver et de comprendre son salaire minimum brut mensuel. Afin de pouvoir 
-    fournir les informations nécessaires, il est conseillé de prendre avec soi la fiche de paie du mois concerné 
-    ainsi que son contrat de travail.""")
+    st.write("""Cet outil permet de retrouver et de comprendre son salaire minimum brut mensuel pour un contrat à temps
+    partiel. Afin de pouvoir fournir les informations nécessaires, il est conseillé de prendre avec soi la fiche de paie
+    du mois concerné ainsi que son contrat de travail.""")
 
 
 def trouver_index(dataf, key):
@@ -84,12 +84,12 @@ with st.container():
     heures_contractuelles = st.number_input("Entrer le nombre d'heures mensuelles "
                                             "inscrites au contrat (hors complément d'heures) ", step=1, format="%i")
     with st.expander("Ou retrouver son nombre d'heures ?"):
-        st.write("""Vous pouvez retrouver ce nombre d'heures sur votre contrat.""")
+        st.write("""Vous pouvez retrouver ce nombre d'heures sur votre contrat de travail.""")
 
     st.write("")
 
     # Conteneur pour complement heures
-    a_complement_heures = st.checkbox("J'ai un ou plusieurs compléments d'heures")
+    a_complement_heures = st.checkbox("J'ai signé un ou plusieurs avenants à mon contrat pour des compléments d'heures")
     with st.expander("Qu'est-ce qu'un complément d'heures ?"):
         st.write("""Un complément d'heure est un avenant au contrat de travail pouvant 
         être proposé au travailleur en temps partiel. Il s'agit d'ajouter des heures 
@@ -224,7 +224,7 @@ with (st.container()):
         heures_complementaires_maj_11 = min(max(heures_travaillees - heures_contractuelles, 0),
                                             0.1 * heures_contractuelles)
         prime_heures_complementaires_maj_11 = base * 1.11 * heures_complementaires_maj_11
-        st.write("J'ai ", heures_complementaires_maj_11, "heures complémentaire majorées à 11%, soit un revenu de : ",
+        st.write("J'ai ", heures_complementaires_maj_11, "heures complémentaires majorées à 11%, soit un revenu de : ",
                  round(prime_heures_complementaires_maj_11, 2), "€")
 
         heures_complementaire_maj_25 = min(
@@ -232,7 +232,7 @@ with (st.container()):
             1 / 3 * heures_contractuelles - 0.1 * heures_contractuelles)
         prime_heures_complementaires_maj_25 = base * 1.25 * heures_complementaire_maj_25
         st.write("J'ai ", round(heures_complementaire_maj_25, 2),
-                 "heures complémentaire majorées à 25%, soit un revenu de : ",
+                 "heures complémentaires majorées à 25%, soit un revenu de : ",
                  round(prime_heures_complementaires_maj_25, 2), "€")
         salaire_brut_total += prime_heures_complementaires_maj_25 + prime_heures_complementaires_maj_11
 

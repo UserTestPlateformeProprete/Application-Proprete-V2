@@ -28,8 +28,11 @@ with st.container(border=True):
     [Vers la convention : les grilles de classification](
     https://www.legifrance.gouv.fr/conv_coll/article/KALIARTI000047082593#KALIARTI000047082593)""")
     with st.expander("Voir les niveaux de rémunération"):
-        st.write("[Vers les grilles de salaires](https://www.convention.fr/convention-proprete-entreprises-de-3173"
-                 ".html#grilles-de-salaire)")
+        st.write("""Les niveaux de rémunération suivant sont extrait directement de l'[avenant relatif aux grilles 
+        tarifaires de la conventation propreté](https://www.legifrance.gouv.fr/conv_coll/article/KALIARTI000046226073#KALIARTI000046226073)
+        . Les grilles présentent un taux horaire A et B. Le taux horaire A concernant les personnes 
+        ayant moins de trois mois d'ancienneté et les personnes dont le contrat concerne une mission de remplacement.
+        """)
         st.write(niveau_remuneration)
 
 # Conteneur d'evaluation de son autonomie
@@ -108,4 +111,23 @@ with (st.container()):
         st.session_state['qualification'] = classe_pretendu
     else:
         st.write("Choississez un niveau pour chacun des trois critères"
-                 " (Autonomie, Responsabilité, Technicité) pour avoir un résultat global")
+                 " (Autonomie, Responsabilité, Technicité) pour avoir un résultat global qui sera affiché ici.")
+
+    st.write("""
+    Il est possible de se voir attribuer plusieurs fonctions qui relèvent de classifications différentes. Pour exemple, 
+    le salarié effectue des tâches de polyvalent (utilisation de machines, lavage des vitres….) et continue à d’assurer 
+    un ménage simple sur d’autres chantiers. Le principe est simple :    
+    - si plus de 20 % du temps mensuel est consacré aux fonctions relevant de la classification la plus élevée, c’est 
+    elle qui doit être choisie.    
+    - sinon, la différence de rémunération entre les 2 classifications doit être portée sur le bulletin de salaire en 
+    fonction du temps passé.    
+        
+    En cas de sous-classification clairement identifiée, il est possible  :    
+    - soit de négocier avec l’employeur en ayant éventuellement recours à un représentant du personnel ou à un Syndicat . 
+    C’est la méthode la plus simple qui, s’il elle est étayée par une argumentation solide (CCNEP) porte ses fruits.    
+    - soit d’effectuer une saisine du conseil de prud’hommes (méthode qui engendrera très certainement des tensions dans le 
+    travail).    
+    
+    Sinon je m'oriente vers : """)
+    if st.button(label="Le calculateur de classe"):
+        st.switch_page("pages/2_💰_Mon_Salaire_Brut.py")
