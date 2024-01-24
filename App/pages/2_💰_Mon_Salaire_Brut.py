@@ -89,7 +89,7 @@ with st.container():
     st.write("")
 
     # Conteneur pour complement heures
-    a_complement_heures = st.checkbox("J'ai signé un ou plusieurs avenants à mon contrat pour des compléments d'heures")
+    a_complement_heures = st.checkbox("J'ai signé un avenant à mon contrat ce mois-ci pour un complément d'heures")
     with st.expander("Qu'est-ce qu'un complément d'heures ?"):
         st.write("""Un complément d'heure est un avenant au contrat de travail pouvant 
         être proposé au travailleur en temps partiel. Il s'agit d'ajouter des heures 
@@ -156,8 +156,8 @@ st.divider()
 a_travail_le_jour_du_dimanche = st.checkbox("J'ai travaillé le dimanche")
 with st.expander("Qu'elle est la rémunération "):
     st.write("""Les heures de travail du dimanche sont majorées dans les conditions ci-après :    
-    - heures de travail effectuées normalement le dimanche conformément au contrat de travail du salarié et/ou planning (sur un document écrit)
-     : 20 % ;    
+    - heures de travail effectuées normalement le dimanche conformément au contrat de travail du salarié et/ou planning 
+    (sur un document écrit) : 20 % ;    
     - heures de travail effectuées exceptionnellement le dimanche non prévues au planning ni au contrat de travail : 
     100 %.""")
 
@@ -195,16 +195,28 @@ st.divider()
 
 # Conteneur pour afficher le salaire
 with (st.container()):
-    st.subheader("Mon salaire brut")
+    st.header("Mon salaire brut")
+
+    # Disclaimer
+    with st.container(border=True):
+        st.write("""
+        Ce calculateur est fourni à titre informatif seulement, il ne remplace pas les conseils professionnels, et 
+        il est donc de la responsabilité de l'utilisateur en cas de d'irrégularité détectée de rencontrer un professionnel
+        pour qu'il puisse constater.
+        """)
 
     salaire_brut_total = 0
 
     # Détermination de la base
     if est_taux_horaire_B:
         base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire B'].iloc[0])
+        text = "Je suis sur le :blue[taux horaire B] donc "
     else:
         base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire A'].iloc[0])
-    st.write("Mon taux horaire brut est de ", base, "€/heure")
+        text = "Je suis sur le :blue[taux horaire A] donc "
+    text += "mon taux horaire brut est de :blue[" + str(base) + "€/h]"
+
+    st.write(text)
 
     # Détermination des heures complémentaires / de la rémunération du complément d'heures
     salaire_complements_heures = 0
@@ -282,4 +294,9 @@ with (st.container()):
     salaire_brut_total += base * (heures_contractuelles - heures_de_nuit_occasionnelles
                                   - heures_de_nuit_regulieres - heures_du_dimanche - heures_du_ferie)
     st.write("**Mon salaire minimum brut est donc de :", round(salaire_brut_total, 2), "€**")
-    st.write("[Que faire si mon salaire brut calculé est supérieur à celui sur ma fiche de paie ?]()")
+
+st.write("Ma classe ne correspond pas :")
+if st.button(label="Vers la FAQ"):
+    st.switch_page("pages/4_❓_FAQ.py")
+
+

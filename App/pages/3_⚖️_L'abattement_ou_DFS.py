@@ -63,7 +63,7 @@ with st.container():
 
 # Nombre de trimestres effectués
 with st.container():
-    a_trimestres_retraite = st.checkbox("Je n'aurais pas tous mes trimestres lorsque je partirai en retraite")
+    a_trimestres_retraite = st.checkbox("Je n'aurai pas tous mes trimestres lorsque je partirai en retraite")
     if a_trimestres_retraite:
         st.subheader("Je renseigne mon nombre de trimestres effectués lorsque je partirai en retraite")
         with st.expander("Vous n'avez pas cette information ?"):
@@ -106,7 +106,20 @@ else:
 # Affichage du nombre d'années nécessaires
 with st.container():
     st.subheader("Bilan : ")
+
+    # Disclaimer
+    with st.container(border=True):
+        st.write("""
+        Ce calculateur est fourni à titre informatif seulement, il ne remplace pas les conseils professionnels, et 
+        il est donc de la responsabilité de l'utilisateur en cas de d'irrégularité détectée de rencontrer un professionnel
+        pour qu'il puisse constater.
+        """)
+
     st.write("A partir des données de la simulation et si les années de la période comptent pour votre retraite, nous "
              "estimons un gain de ", int(gain_abattement_total), "€ via l'abattement mais une perte de ",
              int(difference_retraite), "€/an sur votre retraite. Ainsi à partir de plus de", int(annees_de_retraites),
              " années après la retraite, faire de l'abattement n'est pas avantageux pour vous.")
+
+st.write("Pour plus d'information :")
+if st.button(label="Vers la FAQ"):
+    st.switch_page("pages/4_❓_FAQ.py")

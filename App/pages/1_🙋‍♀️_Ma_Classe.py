@@ -107,6 +107,15 @@ with (tab1):
     # Conteneur du bilan
     with (st.container()):
         st.header("Bilan")
+
+        # Disclaimer
+        with st.container(border=True):
+            st.write("""
+            Ce calculateur est fourni à titre informatif seulement, il ne remplace pas les conseils professionnels, et 
+            il est donc de la responsabilité de l'utilisateur en cas de d'irrégularité détectée de rencontrer un professionnel
+            pour qu'il puisse constater.
+            """)
+
         classe_pretendu = None
         if niveau_responsabilite is not None and niveau_technicite is not None and niveau_autonomie is not None:
             index_classe_pretendu = min(ncr.index.max(), nct.index.max(), nca.index.max())
@@ -123,14 +132,6 @@ with (tab1):
             st.write("Choississez un niveau pour chacun des trois critères"
                      " (Autonomie, Responsabilité, Technicité) pour avoir un résultat global qui sera affiché ici.")
 
-        st.write("""Il est possible de se voir attribuer plusieurs fonctions qui relèvent de classifications 
-        différentes. Par exemple, le salarié effectue des tâches de polyvalent (utilisation de machines, lavage des 
-        vitres ...) et continue à d’assurer un ménage simple sur d’autres chantiers. Le principe est simple :    
-        - si plus de 20 % du temps mensuel est consacré aux fonctions relevant de la classification la plus élevée, 
-        c’est elle qui doit être choisie.    
-        - sinon, la différence de rémunération entre les 2 classifications doit être portée sur le bulletin de salaire 
-        en fonction du temps passé.""")
-
 # Tab2 pour la comparaison avec d'autres métiers
 with (tab2):
     st.write("Sélectionnez le métier qui s'approche le plus du votre : ")
@@ -142,6 +143,15 @@ with (tab2):
     st.divider()
     with (st.container()):
         st.header("Bilan")
+
+        # Disclaimer
+        with st.container(border=True):
+            st.write("""
+            Ce calculateur est fourni à titre informatif seulement, il ne remplace pas les conseils professionnels, et 
+            il est donc de la responsabilité de l'utilisateur en cas de d'irrégularité détectée de rencontrer un professionnel
+            pour qu'il puisse constater.
+            """)
+
         if metier is None:
             st.write("Veuillez d'abord sélectionner une des options ci-dessus.")
         else:
@@ -151,16 +161,10 @@ with (tab2):
             st.write("Les métiers sélectionnés permettent d'accéder au niveau : :blue[", niveau_pretendu.Niveau.iloc[0],
                      "] à l'échelon : :blue[", niveau_pretendu.Échelon.iloc[0], "].")
 
-with st.expander("En cas de sous-classification clairement identifiée ..."):
-    st.write("""    
-            ... il est possible de :    
-            - soit de négocier avec l’employeur en ayant éventuellement recours à un représentant du personnel ou à un 
-            Syndicat . C’est la méthode la plus simple qui, s’il elle est étayée par une argumentation solide (CCNEP) porte 
-            ses fruits.    
-            - soit d’effectuer une saisine du conseil de prud’hommes (méthode qui engendrera très certainement des tensions 
-            dans le travail).    """)
-        
+st.write("Ma classe ne correspond pas :")
+if st.button(label="Vers la FAQ"):
+    st.switch_page("pages/4_❓_FAQ.py")
 
-st.write("Je peux maintenant m'orienter vers :")
+st.write("Je passe au calcul de mon brut :")
 if st.button(label="Le calculateur de classe"):
     st.switch_page("pages/2_💰_Mon_Salaire_Brut.py")

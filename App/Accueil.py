@@ -55,8 +55,11 @@ if col4.button(label="Vers les réponses de la FAQ"):
 
 # fonction d'affichage pour les profils
 def afg_logo_et_lien(logo, lien):
-    col1, col2 = st.columns(spec=[0.05, 0.8], gap='small')
-    col1.image(logo, width=22)
+    col1, col2 = st.columns(spec=[0.05, 0.95], gap='small')
+    try:
+        col1.image(logo, width=22)
+    except:
+        st.write("Image perdue")
     col2.write(lien)
     return col1, col2
 
@@ -67,8 +70,11 @@ with (st.expander(label="Qui sommes nous ?")):
     with auteurs1:
         # Paul
         with st.container():
-            st.image(image='App\img\paul.png', caption="Paul Jourdain")
-            st.write("Etudiant en dernière année à l'IMT NE, je m'intéresse à rendre l'informatique plsus durable. J'ai"
+            try:
+                st.image(image='App\img\paul.png', caption="Paul Jourdain")
+            except:
+                st.write("Image perdue")
+            st.write("Etudiant en dernière année à l'IMT NE, je m'intéresse à rendre l'informatique plus durable. J'ai"
                      " rejoint ce projet car je voulais mettre mes compétences au service d'un projet humain.")
             lin_logo_paul, lin_lien_paul = afg_logo_et_lien('App/img/logo-linkedin-icon-1536.png',
                                                             "[@jourdain-paul](www.linkedin.com/in/jourdain-paul)")
@@ -77,10 +83,13 @@ with (st.expander(label="Qui sommes nous ?")):
     with auteurs2:
         # Alexandre
         with st.container():
-            st.image(image='App/img/Alexandre.png', caption="Alexandre")
-            st.write("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut "
-                     "labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
-                     " nisi ut.")
+            try:
+                st.image(image='App/img/Alexandre.png', caption="Alexandre Pontida")
+            except:
+                st.write("Image perdue")
+            st.write("Je suis aussi étudiant en dernière année à IMT NE,  dans la partie Matériaux de l’école. Étant de"
+                     " nature curieuse, ce projet m’a permis de développer mes connaissances en informatique et "
+                     "d’apprendre de très nombreuses connaissances sur les droits des travailleurs.")
             lin_logo_alex, lin_lien_alex = afg_logo_et_lien('App/img/logo-linkedin-icon-1536.png',
                                                             '[@alexandre-pontida](www.linkedin.com/in/alexandre-'
                                                             'pontida)')
