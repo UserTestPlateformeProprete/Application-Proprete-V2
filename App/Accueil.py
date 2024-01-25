@@ -71,7 +71,7 @@ with (st.expander(label="Qui sommes nous ?")):
         # Paul
         with st.container():
             try:
-                st.image(image='App\img\paul.png', caption="Paul Jourdain")
+                st.image(image='App/img/Paul.png', caption="Paul Jourdain")
             except:
                 st.write("Image perdue")
             st.write("Etudiant en dernière année à l'IMT NE, je m'intéresse à rendre l'informatique plus durable. J'ai"
