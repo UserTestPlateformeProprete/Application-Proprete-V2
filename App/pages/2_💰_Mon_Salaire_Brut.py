@@ -14,6 +14,15 @@ grades = pd.read_csv('App/data/fiche_classes_et_salaires.csv')
 # Inscription en dur des niveaux de prime d'ancienneté
 primes = [[4, 2], [6, 3], [8, 4], [10, 5], [15, 5.5], [20, 6]]
 
+
+def trouver_index(dataf, key):
+    i = 0
+    for elt in dataf:
+        if elt == key: break
+        i += 1
+    return i
+
+
 # Initialisation des variables dans le session state
 if 'qualification' not in st.session_state:
     st.session_state['qualification'] = None
@@ -23,15 +32,6 @@ with st.container(border=True):
     st.write("""Cet outil permet de retrouver et de comprendre son salaire minimum brut mensuel pour un contrat à temps
     partiel. Afin de pouvoir fournir les informations nécessaires, il est conseillé de prendre avec soi la fiche de paie
     du mois concerné ainsi que son contrat de travail.""")
-
-
-def trouver_index(dataf, key):
-    i = 0
-    for elt in dataf:
-        if elt == key: break
-        i += 1
-    return i
-
 
 # Conteneur pour le renseignement de son grade
 with st.container():
@@ -209,13 +209,14 @@ with (st.container()):
 
     # Détermination de la base
     if est_taux_horaire_B:
-        base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire B'].iloc[0])
+        base = float(
+            grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire B'].iloc[0])
         text = "Je suis sur le :blue[taux horaire B] donc "
     else:
-        base = float(grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire A'].iloc[0])
+        base = float(
+            grades.loc[(grades["Niveau"] == niveau) & (grades["Echelon"] == echelon), 'Taux Horaire A'].iloc[0])
         text = "Je suis sur le :blue[taux horaire A] donc "
     text += "mon taux horaire brut est de :blue[" + str(base) + "€/h]"
-
     st.write(text)
 
     # Détermination des heures complémentaires / de la rémunération du complément d'heures
@@ -228,7 +229,7 @@ with (st.container()):
                 heures_travaillees - heures_contractuelles - heures_du_complement)
         st.write("Mon complément d'heures de ", round(heures_du_complement, 2), "h me rapporte ",
                  round(salaire_complements_heures, 2), "€")
-        st.write("""Mes heures "supplémentaire" en dehors de compléments d'heures me rapporte """,
+        st.write("""Mes heures "supplémentaires" en dehors de compléments d'heures me rapportent """,
                  round(salaire_complements_heures, 2), "€")
         salaire_brut_total += salaire_complements_heures + prime_heures_complementaires_maj_25
 
@@ -295,8 +296,6 @@ with (st.container()):
                                   - heures_de_nuit_regulieres - heures_du_dimanche - heures_du_ferie)
     st.write("**Mon salaire minimum brut est donc de :", round(salaire_brut_total, 2), "€**")
 
-st.write("Ma classe ne correspond pas :")
+st.write("Mon salaire ne correspond pas :")
 if st.button(label="Vers la FAQ"):
     st.switch_page("pages/4_❓_FAQ.py")
-
-
