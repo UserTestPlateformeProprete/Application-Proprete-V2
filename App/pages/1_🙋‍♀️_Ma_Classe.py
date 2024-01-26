@@ -26,13 +26,15 @@ with st.container(border=True):
     responsabilité au travail. Il est constitué d'un niveau et d'un échelon marquant la progression au sein de ce 
     niveau. Il est associé à un niveau de rémunération plus ou moins élevé.    
     [Vers la convention : les grilles de classification](
-    https://www.legifrance.gouv.fr/conv_coll/article/KALIARTI000047082593#KALIARTI000047082593)""", unsafe_allow_html=True)
+    https://www.legifrance.gouv.fr/conv_coll/article/KALIARTI000047082593#KALIARTI000047082593)""",
+             unsafe_allow_html=True)
     with st.expander("Voir les niveaux de rémunération"):
         st.write("""Les niveaux de rémunération suivant sont extrait directement de l'[avenant relatif aux grilles 
         tarifaires de la conventation propreté](https://www.legifrance.gouv.fr/conv_coll/article/KALIARTI000046226073#KALIARTI000046226073)
-        . Les grilles présentent un taux horaire A et B. Le taux horaire A concernant les personnes 
-        ayant moins de trois mois d'ancienneté et les personnes dont le contrat concerne une mission de remplacement.
-        """)
+        . Les grilles présentent un taux horaire A et B. Le taux horaire B concerne les personnes 
+        ayant au moins trois mois d'ancienneté, dont le contrat ne concerne pas une mission de remplacement et qui ont plusieurs rôles dans l'entreprise.
+        Cela peut être par exemple, s'occuper des missions classiques demandé aux agents d'entretien, mais avoir en plus de celles-ci le gardiennage des clés, la fermeture du portail...
+        Pour plus de renseignements, vous pouvez consulter la FAQ pour trouver une liste de contact utile.""")
         st.write(niveau_remuneration)
 
 st.write("""Nous vous proposons deux outils pour vérifier votre classe :     
@@ -123,7 +125,7 @@ with (tab1):
             st.write("La combinaison de mon niveau d'autonomie, de technicité dans mon travail et de responsabilité me "
                      "permet prétendre à la qualification :blue[", classe_pretendu.iloc[0, 0], "], échelon : :blue[",
                      classe_pretendu.iloc[0, 1], "].")
-            st.write("Cela me permet de prétendre à un salaire de :blue[",
+            st.write("Cela me permet de prétendre à un salaire brut de :blue[",
                      str(niveau_remuneration.loc[(niveau_remuneration["Niveau"] == classe_pretendu.iloc[0, 0]) &
                                                  (niveau_remuneration["Echelon"] == classe_pretendu.iloc[0, 1]),
                      "Taux Horaire B"].iloc[0]), "€/h].")
@@ -156,7 +158,7 @@ with (tab2):
             st.write("Veuillez d'abord sélectionner une des options ci-dessus.")
         else:
             niveau_pretendu = data_echelons.loc[data_echelons["Liste non exhaustive d'emplois repères"] == metier,
-                                                ["Niveau", "Échelon"]]
+                                                ["Niveau", "Échelon"]].drop_duplicates()
             st.session_state['qualification'] = niveau_pretendu
             st.write("Les métiers sélectionnés permettent d'accéder au niveau : :blue[", niveau_pretendu.Niveau.iloc[0],
                      "] à l'échelon : :blue[", niveau_pretendu.Échelon.iloc[0], "].")
@@ -165,6 +167,6 @@ st.write("Ma classe ne correspond pas :")
 if st.button(label="Vers la FAQ"):
     st.switch_page("pages/4_❓_FAQ.py")
 
-st.write("Je passe au calcul de mon brut :")
-if st.button(label="Le calculateur de classe"):
+st.write("Je passe au calcul de mon salaire brut :")
+if st.button(label="Le calculateur de salaire"):
     st.switch_page("pages/2_💰_Mon_Salaire_Brut.py")

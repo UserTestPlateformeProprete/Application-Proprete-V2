@@ -39,3 +39,6 @@ with st.container():
         collective Propreté 2024](https://www.convention.fr/convention-proprete-entreprises-de-3173.html)
         """)
 
+    st.write("""Si vous souhaitez argumenter votre requête auprès de votre direction, 
+    nous vous conseillons de fontionner par écrit, et de fournir des captures d'écran de message, ou des photos du planning affiché.
+            """)

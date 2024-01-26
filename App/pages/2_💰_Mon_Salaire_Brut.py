@@ -88,7 +88,7 @@ with st.container():
 
     st.write("")
 
-    # Conteneur pour complement heures
+# Conteneur pour complement heures
     a_complement_heures = st.checkbox("J'ai signé un avenant à mon contrat ce mois-ci pour un complément d'heures")
     with st.expander("Qu'est-ce qu'un complément d'heures ?"):
         st.write("""Un complément d'heure est un avenant au contrat de travail pouvant 
@@ -108,8 +108,14 @@ with st.container():
                                          step=1,
                                          format="%i")
 
-    est_taux_horaire_B = st.checkbox("J'ai travaillé trois mois en continu dans cette entreprise et mon poste n'est "
-                                     "pas un remplacement")
+    est_taux_horaire_B = st.checkbox("Je suis au taux horaire B.")
+
+    with st.expander("Qu'elle est la différence entre le taux horaire A et B ?"):
+        st.write("""Qu'importe votre classe, le taux horaire B est supérieur au taux horaire B. Vous correspondez au taux horaire B si vous avez au moins trois mois d'ancienneté, 
+        votre contrat ne concerne pas une mission de remplacement et qui vous avez plusieurs rôles dans l'entreprise.
+        Cela peut être par exemple, s'occuper des missions classiques demandé aux agents d'entretien, mais avoir en plus de celles-ci le gardiennage des clés, la fermeture du portail...
+        Pour plus de renseignements, vous pouvez consulter la FAQ pour trouver une liste de contact utile.
+        """)
 
 st.divider()
 
@@ -154,7 +160,7 @@ st.divider()
 # Conteneur pour renseigner son nombre d'heures le dimanche
 
 a_travail_le_jour_du_dimanche = st.checkbox("J'ai travaillé le dimanche")
-with st.expander("Qu'elle est la rémunération "):
+with st.expander("Quelle est la rémunération ?"):
     st.write("""Les heures de travail du dimanche sont majorées dans les conditions ci-après :    
     - heures de travail effectuées normalement le dimanche conformément au contrat de travail du salarié et/ou planning 
     (sur un document écrit) : 20 % ;    
@@ -175,7 +181,7 @@ st.divider()
 # Conteneur pour renseigner son nombre d'heures les jours fériés
 
 a_travail_le_jour_ferie = st.checkbox("J'ai travaillé des jours fériés")
-with st.expander("Qu'elle est la rémunération pour les jours fériés? "):
+with st.expander("Quelle est la rémunération pour les jours fériés? "):
     st.write("""Les heures de travail les jours fériés sont majorées dans les conditions ci-après :    
     – heures de travail effectuées normalement les jours fériés conformément au contrat de travail et/ou planning (sur un document écrit)
     du salarié : 50%;    
@@ -295,7 +301,13 @@ with (st.container()):
     salaire_brut_total += base * (heures_contractuelles - heures_de_nuit_occasionnelles
                                   - heures_de_nuit_regulieres - heures_du_dimanche - heures_du_ferie)
     st.write("**Mon salaire minimum brut est donc de :", round(salaire_brut_total, 2), "€**")
+    st.write("""Pour calculer votre salaire net, vous pouvez utiliser le site du gouvernement suivant : 
+    [Calculateur de salaire net](https://code.travail.gouv.fr/outils/simulateur-embauche)""")
 
 st.write("Mon salaire ne correspond pas :")
 if st.button(label="Vers la FAQ"):
     st.switch_page("pages/4_❓_FAQ.py")
+
+st.write("Je veux vérifier si l'abattement est intéressant pour moi :")
+if st.button(label="Vers la page sur l'Abattement"):
+    st.switch_page("pages/3_⚖️_L'abattement_ou_DFS.py")
